@@ -1,13 +1,18 @@
 import { RouterProvider } from "react-router-dom"
 import { Router } from "./Routes"
+// import { useAppSelector } from "./Store/Hooks"
+// import { ThemeProvider } from "@emotion/react";
+// import { getTheme } from "./Theme";
 
 
 function App() {
-
+  // const { isToggleTheme } = useAppSelector((state) => state.layout);
   return (
     <>
-      <RouterProvider router={Router} />
-      <p>Hello, Payment</p>
+      {/* <ThemeProvider theme={getTheme(isToggleTheme === "light" ? "light" : "dark")} > */}
+        <RouterProvider router={Router} />
+        <p>Hello, Payment</p>
+      {/* </ThemeProvider> */}
     </>
   )
 }

@@ -1,7 +1,13 @@
 export const URL_KEYS = {
     AUTH: {
         SIGNIN: "/auth/login",
+        FORGOT_PASSWORD: "/auth/forgot-password",
         VERIFY_OTP: "/auth/verify-otp",
-        CHANGE_PASSWORD: "/auth/change-password",
-    }
-};
+        UPDATE_PASSWORD: "/auth/update-password",
+        RESEND_OTP: "/auth/resend-otp",
+        RESET_PASSWORD: "/auth/reset-password",
+    },
+    DASHBOARD: {
+        BASE: "/dashboard",
+    },
+} as const;

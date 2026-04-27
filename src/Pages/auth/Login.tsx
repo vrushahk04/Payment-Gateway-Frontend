@@ -1,123 +1,137 @@
-import { Button, Card } from "antd"
+import { Button, Card } from "antd";
 import { useState } from "react";
-import { Formik, Form } from 'formik';
-import CommonInput from "../../Components/Common/commonForm/commonInput";
-import CommonCheckbox from "../../Components/Common/commonForm/commonCheckbox";
+import { Formik, Form } from "formik";
 import { useNavigate } from "react-router-dom";
 
+import CommonInput from "../../Components/Common/CommonForm/CommonInput";
+import CommonCheckbox from "../../Components/Common/CommonForm/CommonCheckbox";
+import { LoginSchema } from "../../Utils";
+import { EyeInvisibleFilled, EyeFilled } from "@ant-design/icons";
+
 const Login = () => {
-  
-  const [step, setStep] = useState<"login" | "otp">("otp");
   const [remember, setRemember] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+
   const navigate = useNavigate();
 
   return (
-    <>
-      <div className="flex items-center justify-center min-h-screen bg-[var(--primary-20)]">
-        <Card className="bg-white rounded-2xl px-8 pt-10 pb-8 shadow-lg border border-slate-100 w-[400px] max-[480px]:w-full">
-          <div className="text-center mb-8">
-           <div className="mb-4 flex justify-center">
-              <div className="w-12 h-12 rounded-full bg-[var(--primary-20)] flex items-center justify-center text-sm font-semibold text-[var(--black)]">
-                PG
-              </div>
+    <div className="relative flex items-center justify-center min-h-screen bg-gradient-to-br from-brand-50 via-white to-accent-50 px-4">
+
+      {/* BACKGROUND GLOW */}
+      <div className="absolute w-125 h-125 bg-brand-200 rounded-full blur-3xl opacity-40 -top-25 -left-25" />
+      <div className="absolute w-96 h-96 bg-accent-200 rounded-full blur-3xl opacity-30 bottom-0 right-0" />
+
+      <Card
+        className="
+          rounded-[36px]!
+          [&_.ant-card]:rounded-[36px]!
+          relative z-10 
+          w-full max-w-md
+          border border-white/40 
+          bg-white/70 backdrop-blur-2xl 
+          shadow-theme-xl
+          px-8 py-10
+        "
+      >
+
+        {/* HEADER */}
+        <div className="text-center mb-10">
+          <div className="mb-6 flex justify-center">
+            <div className="w-14 h-14 rounded-2xl bg-brand-500 text-white flex items-center justify-center text-lg font-bold shadow-theme-md">
+              PG
             </div>
-            <h1 className="text-slate-800 text-[1.75rem] font-bold mb-[6px] tracking-[-0.025em] max-[480px]:text-[1.5rem]">
-              Payment Gateway
-              
-            </h1>
-            
-            <p className="text-slate-500 text-sm font-medium">
-              Trusted & encrypted payment access
-            </p>
           </div>
-          {step === "login" && (
-            <>
-              <Formik initialValues={{ email: '', password: '' }} onSubmit={(values) => {
-                console.log(values);
-                setStep("otp");
-              }}>
-                <Form className="space-y-4">
-                  <CommonInput name="email" label="Email" type="email" placeholder="Enter your email" />
-                  <CommonInput name="password" label="Password" type="password" placeholder="Enter your password" />
-                  <div className="flex items-center justify-between mt-4">
-                    <CommonCheckbox
-                      label="Remember me"
-                      checked={remember}
-                      onChange={setRemember}
-                    />
-                    <Button
-                      type="link"
-                      className="text-sm font-medium"
-                      onClick={() => navigate("/forgot-password")}
-                      >
-                      Forgot Password?
-                      </Button>
-                  </div>
-                  <Button
-                    type="primary"
-                    htmlType="submit"
-                    block
-                    size="large"
-                    className="mt-2 h-11 rounded-lg font-medium"
-                  >
-                    Login
-                  </Button>
-                </Form>
-              </Formik>
-            </>
-          )}
-          {step === "otp" && (
-            <Formik
-              initialValues={{ otp: "" }}
-              onSubmit={(values) => {
-                console.log("OTP:", values.otp);
-              }}
+
+          <h1 className="text-gray-900 text-2xl font-semibold tracking-tight">
+            Payment Gateway
+          </h1>
+
+          <p className="text-gray-500 text-sm mt-2">
+            Secure access to your dashboard
+          </p>
+        </div>
+
+        {/* FORM */}
+        <Formik
+          initialValues={{ email: "", password: "" }}
+          validationSchema={LoginSchema}
+          onSubmit={(values) => {
+            console.log(values);
+            navigate("/verify-otp");
+          }}
+        >
+          <Form className="space-y-6">
+
+            {/* EMAIL */}
+            <div className="space-y-1.5">
+              <CommonInput
+                name="email"
+                label="Email"
+                type="email"
+                placeholder="Enter your email"
+              />
+            </div>
+
+            {/* PASSWORD */}
+            <div className="relative space-y-1.5">
+              <CommonInput
+                name="password"
+                label="Password"
+                type={showPassword ? "text" : "password"}
+                placeholder="Enter your password"
+              />
+
+              <span
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-3 top-10 cursor-pointer text-gray-400 hover:text-brand-600 transition"
+              >
+                {showPassword ? <EyeInvisibleFilled /> : <EyeFilled />}
+              </span>
+            </div>
+
+            {/* OPTIONS */}
+            <div className="flex items-center justify-between text-sm pt-1">
+              <CommonCheckbox
+                label="Remember me"
+                checked={remember}
+                onChange={setRemember}
+              />
+
+              <button
+                type="button"
+                onClick={() => navigate("/auth/forgot-password")}
+                className="text-brand-700 font-medium hover:text-brand-600 transition w-40 text-right"
+              >
+                Forgot Password?
+              </button>
+            </div>
+
+            {/* BUTTON */}
+            <Button
+              type="primary"
+              htmlType="submit"
+              block
+              size="large"
+              className="
+                h-12 
+                rounded-[20px]!
+                !bg-brand-800 
+                hover:!bg-brand-600 
+                active:!bg-brand-700
+                border-none 
+                font-medium
+                shadow-theme-md
+              "
             >
-              <Form>
-                <p className="text-sm text-slate-500 mb-2 text-center">
-                  Verify your identity to continue
-                </p>
+              Continue
+            </Button>
 
-                <p className="text-xs text-slate-400 text-center mb-4">
-                  A secure code was sent to your registered email
-                </p>
-                <CommonInput
-                  name="otp"
-                  label="Enter OTP"
-                  placeholder="Enter 6-digit OTP"
-                  type="text"
-                />
+          </Form>
+        </Formik>
 
-                <Button
-                  type="primary"
-                  htmlType="submit"
-                  block
-                  className="mt-4"
-                >
-                  Verify OTP
-                </Button>
-                <div className="flex justify-between mt-3 text-sm">
-                  <span className="text-slate-500">Didn’t receive OTP?</span>
-                  <Button type="link" className="p-0 h-auto">
-                    Resend
-                  </Button>
-                </div>
+      </Card>
+    </div>
+  );
+};
 
-                <div className="text-center mt-4">
-                  <Button
-                    type="link"
-                    onClick={() => setStep("login")}
-                  >
-                    Back to Login
-                  </Button>
-                </div>
-              </Form>
-            </Formik>
-          )}
-        </Card>
-      </div>
-    </>
-  )
-}
-
-export default Login
+export default Login;

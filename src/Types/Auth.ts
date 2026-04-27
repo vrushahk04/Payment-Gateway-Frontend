@@ -1,0 +1,57 @@
+import type { CommonDataType, MessageStatus } from "./Common";
+
+export interface LoginPayload {
+    email: string;
+    password: string;
+}
+
+export interface ChangePasswordPayload {
+    email?: string;
+    oldPassword?: string;
+    newPassword?: string;
+    confirmPassword?: string;
+}
+export interface User extends LoginPayload, CommonDataType {
+    fullName: string;
+    phoneNumber: string;
+    profileImage: string;
+    role: string;
+}
+
+export interface LoginResponse extends MessageStatus {
+    data: {
+        token: string;
+        user: User;
+    };
+}
+
+export interface ForgotPasswordPayload {
+    email: string;
+}
+
+export interface VerifyOtpPayload {
+    email: string;
+    otp: string;
+}
+
+export interface UpdatePasswordPayload {
+    email: string;
+    newPassword: string;
+    confirmPassword: string;
+}
+
+export interface UpdatePasswordFormValues {
+    newPassword: string;
+    confirmPassword: string;
+}
+
+export interface ResendOtpPayload {
+    email: string;
+}
+
+export interface ResetPasswordPayload {
+    email: string;
+    oldPassword: string;
+    newPassword: string;
+    confirmPassword: string;
+}

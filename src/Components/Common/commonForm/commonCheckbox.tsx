@@ -20,21 +20,20 @@ const CommonCheckbox = ({
   disabled = false,
 }: Props) => {
   return (
-    <div className="w-full">
+    <div className="w-full custom-checkbox">
       <Checkbox
         checked={checked}
         onChange={(e) => onChange(e.target.checked)}
         disabled={disabled}
-        className="text-gray-700"
       >
-        <span className="text-sm font-medium">
-          {label} {required && <span className="text-red-500">*</span>}
+        <span className="text-sm font-medium text-gray-700">
+          {label} {required && <span className="text-error-500">*</span>}
         </span>
       </Checkbox>
 
       {error && (
-        <p className="text-red-500 text-xs mt-2 flex items-center gap-1">
-          <span className="inline-block w-1 h-1 rounded-full bg-red-500"></span>
+        <p className="text-error-500 text-xs mt-2 flex items-center gap-1">
+          <span className="inline-block w-1 h-1 rounded-full bg-error-500"></span>
           {error}
         </p>
       )}

@@ -1,25 +1,23 @@
-
 import { createBrowserRouter } from "react-router-dom";
-import { ROUTES } from "../Constants/Routes";
-
-import { PageRoutes } from "./PageRoutes";
+// import Layout from "../Layout";
+import { AuthRoutes, PageRoutes } from "./PageRoutes";
 import PrivateRoutes from "./PrivateRoutes";
-import Login from "../Pages/auth/Login";
-import ForgetPassword from "../Pages/auth/ForgetPassword";
-import Dashboard from "../Pages/Dashboard";
+import PublicRoutes from "./PublicRoutes";
+// import NotFound from "../Pages/NotFound";
 
 export const Router = createBrowserRouter([
-    { path: ROUTES.AUTH.LOGIN, element: <Login /> },
-    { path: ROUTES.AUTH.FORGOT_PASSWORD, element: <ForgetPassword /> },
-
-
-    {
-        element: <PrivateRoutes />,
-        children: [
-            {
-                element: <Dashboard />,
-                children: PageRoutes,
-            },
-        ],
-    },
+  {
+    element: <PrivateRoutes />,
+    children: [
+      {
+        // element: <Layout />,
+        children: PageRoutes,
+      },
+    ],
+  },
+  {
+    element: <PublicRoutes />,
+    children: AuthRoutes,
+  },
+//   { path: "*", element: <NotFound /> },
 ]);
