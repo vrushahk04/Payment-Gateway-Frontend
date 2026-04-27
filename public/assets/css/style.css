@@ -23,16 +23,16 @@
 @layer components {
   .custom-input.ant-input {
     @apply rounded-lg transition;
-  }
+  } 
 
   /* Focus state */
-  .custom-input.ant-input:focus,
+   .custom-input.ant-input:focus,
   .custom-input.ant-input-focused {
-    @apply border-primary;
+    @apply 
+    border-primary;
     box-shadow: 0 0 0 2px var(--primary);
   }
 
-  /* Hover */
   .custom-input.ant-input:hover {
     @apply border-primary;
   }

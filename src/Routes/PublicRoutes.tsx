@@ -3,15 +3,16 @@ import { ROUTES } from "../Constants";
 import { useAppSelector } from "../Store";
 
 const PublicRoutes = () => {
-  const { isAuthenticated, role } = useAppSelector((store) => store.auth);
+  const { isAuthenticated, role } = useAppSelector((s) => s.auth);
 
   if (!isAuthenticated) return <Outlet />;
 
-  if (role === "admin") {
-    return <Navigate to={ROUTES.DASHBOARD} replace />;
-  }
-
-  return <Navigate to={ROUTES.USER.HOME} replace />;
+  return (
+    <Navigate
+      to={role === "admin" ? ROUTES.DASHBOARD : ROUTES.USER.HOME}
+      replace
+    />
+  );
 };
 
 export default PublicRoutes;

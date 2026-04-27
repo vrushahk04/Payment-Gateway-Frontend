@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../Store";
 import { setSignOut } from "../../Store";
 import { ROUTES } from "../../Constants";
+import Layout from "../../Layout";
 
 const User = () => {
   const dispatch = useAppDispatch();
@@ -16,20 +17,23 @@ const User = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center gap-6">
+    <>
+      <Layout />
+      <div className="min-h-screen flex flex-col items-center justify-center gap-6">
       
-      <h1 className="text-2xl font-semibold">UserDashboard</h1>
+        <h1 className="text-2xl font-semibold">UserDashboard</h1>
 
-      <Button
-        type="primary"
-        danger
-        onClick={handleLogout}
-        className="h-10 px-6 rounded-lg"
-      >
-        Logout
-      </Button>
+        <Button
+          type="primary"
+          danger
+          onClick={handleLogout}
+          className="h-10 px-6 rounded-lg"
+        >
+          Logout
+        </Button>
 
-    </div>
+      </div>
+    </>
   );
 };
 

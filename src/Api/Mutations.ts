@@ -15,16 +15,4 @@ export const Mutations = {
             (input) => Post(URL_KEYS.AUTH.LOGIN, input, false)
         ),
 
-    // ************ PASSWORD (PROFILE ONLY) ************
-    // useUpdatePassword: () =>
-    //     useMutations<UpdatePasswordPayload, MessageStatus>(
-    //         [KEYS.AUTH.UPDATE_PASSWORD],
-    //         (input) => Post(URL_KEYS.AUTH.UPDATE_PASSWORD, input, false)
-    //     ),
-
-    // useResetPassword: () =>
-    //     useMutations<ResetPasswordPayload, MessageStatus>(
-    //         [KEYS.AUTH.RESET_PASSWORD],
-    //         (input) => Post(URL_KEYS.AUTH.RESET_PASSWORD, input)
-    //     ),
 };
