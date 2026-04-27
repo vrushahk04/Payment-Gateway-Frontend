@@ -1,24 +1,65 @@
 import { Button, Card } from "antd";
 import { useState } from "react";
-import { Formik, Form } from "formik";
+import { Formik, Form, type FormikHelpers } from "formik";
 import { useNavigate } from "react-router-dom";
 
 import CommonInput from "../../Components/Common/CommonForm/CommonInput";
 import CommonCheckbox from "../../Components/Common/CommonForm/CommonCheckbox";
 import { LoginSchema } from "../../Utils";
 import { EyeInvisibleFilled, EyeFilled } from "@ant-design/icons";
+import { setLogin, setSignOut, useAppDispatch } from "../../Store";
+import { Mutations } from "../../Api";
+import type { LoginFormValues, LoginPayload } from "../../Types";
+import { ROUTES } from "../../Constants";
 
 const Login = () => {
   const [remember, setRemember] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
+  const { mutate: login, isPending: isLoginPending } = Mutations.useLogin();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
+  const handleSubmit = (
+    values: LoginFormValues,
+    { resetForm }: FormikHelpers<LoginFormValues>
+  ) => {
+    const payload: LoginPayload = {
+      userName: values.email.toLowerCase(),
+      password: values.password,
+    };
+
+    login(payload, {
+      onSuccess: (response) => {
+        const res = response?.data;
+        const data = res ?? res;
+
+        if (!data?.token) {
+          console.error("Invalid login response", response);
+          return;
+        }
+
+        dispatch(setSignOut());
+        dispatch(setLogin(data));
+
+        const role = data.user?.role;
+
+        if (role === "admin") {
+          navigate(ROUTES.DASHBOARD, { replace: true });
+        } else {
+          navigate(ROUTES.USER.HOME, { replace: true });
+        }
+
+        resetForm();
+      }
+    });
+  };
 
   return (
     <div className="relative flex items-center justify-center min-h-screen bg-gradient-to-br from-brand-50 via-white to-accent-50 px-4">
 
       {/* BACKGROUND GLOW */}
-      <div className="absolute w-125 h-125 bg-brand-200 rounded-full blur-3xl opacity-40 -top-25 -left-25" />
+      <div className="absolute w-100 h-100 bg-brand-200 rounded-full blur-3xl opacity-40 -top-25 -left-25" />
       <div className="absolute w-96 h-96 bg-accent-200 rounded-full blur-3xl opacity-30 bottom-0 right-0" />
 
       <Card
@@ -52,13 +93,10 @@ const Login = () => {
         </div>
 
         {/* FORM */}
-        <Formik
+        <Formik<LoginFormValues>
           initialValues={{ email: "", password: "" }}
           validationSchema={LoginSchema}
-          onSubmit={(values) => {
-            console.log(values);
-            navigate("/verify-otp");
-          }}
+          onSubmit={handleSubmit}
         >
           <Form className="space-y-6">
 
@@ -96,14 +134,6 @@ const Login = () => {
                 checked={remember}
                 onChange={setRemember}
               />
-
-              <button
-                type="button"
-                onClick={() => navigate("/auth/forgot-password")}
-                className="text-brand-700 font-medium hover:text-brand-600 transition w-40 text-right"
-              >
-                Forgot Password?
-              </button>
             </div>
 
             {/* BUTTON */}
@@ -115,13 +145,14 @@ const Login = () => {
               className="
                 h-12 
                 rounded-[20px]!
-                !bg-brand-800 
+                !bg-brand-500 
                 hover:!bg-brand-600 
                 active:!bg-brand-700
                 border-none 
                 font-medium
                 shadow-theme-md
               "
+              loading={isLoginPending}
             >
               Continue
             </Button>

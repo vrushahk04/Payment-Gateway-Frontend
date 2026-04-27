@@ -34,30 +34,52 @@
   --color-white: #ffffff;
   --color-black: #101828;
 
-  /* ---------------- BRAND (NEW THEME) ---------------- */
-  --color-brand-25:  #f9fbf8;
-  --color-brand-50:  #f2f7f1;
-  --color-brand-100: #e4efe3;
-  --color-brand-200: #cfe3cc;
-  --color-brand-300: #b8d8b5;
-  --color-brand-400: #9FCB98; /* light */
-  --color-brand-500: #79AE6F; /* main */
-  --color-brand-600: #5f9658;
-  --color-brand-700: #346739; /* primary */
-  --color-brand-800: #2b5430;
-  --color-brand-900: #214226;
-  --color-brand-950: #142a18;
+  /* ---------------- NEW GLOBAL TOKENS ---------------- */
+  --background: #0A0A0F;
+  --foreground: #ffffff;
 
-  /* ---------------- ACCENT ---------------- */
-  --color-accent-50:  #fdfcf5;
-  --color-accent-100: #f9f7e6;
-  --color-accent-200: #f5f1d2;
-  --color-accent-300: #F2EDC2;
-  --color-accent-400: #e6dfaa;
-  --color-accent-500: #d6cf90;
+  --primaryy: #8B5CF6;
+  --primary-dark: #7C3AED;
+
+  --accent: #A78BFA;
+
+  --surface: #16161D;
+  --surface-light: #1F1F28;
+
+  --border: #2A2A35;
+
+  --text-muted: #A0A0B0;
+
+  --success: #10B981;
+  --warning: #F59E0B;
+
+  --code-bg: #0D0D12;
+  --code-border: #252530;
+
+  /* ---------------- BRAND (UPDATED TO NEW THEME) ---------------- */
+  --color-brand-25:  #F5F3FF;
+  --color-brand-50:  #EDE9FE;
+  --color-brand-100: #DDD6FE;
+  --color-brand-200: #C4B5FD;
+  --color-brand-300: #A78BFA;
+  --color-brand-400: #8B5CF6; 
+  --color-brand-500: #8B5CF6; 
+  --color-brand-600: #7C3AED;
+  --color-brand-700: #6D28D9; 
+  --color-brand-800: #5B21B6;
+  --color-brand-900: #4C1D95;
+  --color-brand-950: #2E1065;
+
+/* ---------------- ACCENT ---------------- */
+  --color-accent-50:  #F5F3FF;
+  --color-accent-100: #EDE9FE;
+  --color-accent-200: #DDD6FE;
+  --color-accent-300: #C4B5FD;
+  --color-accent-400: #A78BFA;
+  --color-accent-500: #8B5CF6;
 
   /* ---------------- SECONDARY (OPTIONAL USE) ---------------- */
-  --color-secondary-500: #9FCB98;
+  --color-secondary-500: #A78BFA;
 
   /* ---------------- GRAYS (UNCHANGED) ---------------- */
   --color-gray-25: #fcfcfd;
@@ -72,6 +94,7 @@
   --color-gray-800: #333333;
   --color-gray-900: #1f1f1f;
   --color-gray-950: #121212;
+  --color-gray-dark: #0a0a0a;
 
   /* ---------------- SEMANTIC ---------------- */
   --color-theme-primary-500: var(--color-brand-500);
@@ -94,7 +117,7 @@
                     0px 8px 8px rgba(16, 24, 40, 0.03);
 
   /* Updated focus ring */
-  --shadow-focus-ring: 0px 0px 0px 4px rgba(121, 174, 111, 0.35);
+  --shadow-focus-ring: 0px 0px 0px 4px rgba(139, 92, 246, 0.35);
 
   /* ---------------- Z INDEX ---------------- */
   --z-index-1: 1;
@@ -118,7 +141,7 @@
   --blue-900: var(--color-brand-900);
 
   --ray-color: var(--color-brand-500);
-  --ray-shadow: rgba(121, 174, 111, 0.6);
+  --ray-shadow: rgba(139, 92, 246, 0.6);
 }
 
 /* ---------------- LIGHT MODE ---------------- */
@@ -136,7 +159,7 @@
   --blue-900: var(--color-black);
 
   --ray-color: var(--color-brand-700);
-  --ray-shadow: rgba(52, 103, 57, 0.4);
+  --ray-shadow: rgba(139, 92, 246, 0.4);
 }
 
 /* ---------------- EFFECT ---------------- */

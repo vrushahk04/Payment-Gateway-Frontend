@@ -1,13 +1,10 @@
 export const ROUTES = {
     HOME: "/",
     DASHBOARD: "/dashboard",
-    ACCESS_DENIED: "/access-denied",
     AUTH: {
         LOGIN: "/auth/login",
-        VERIFY_OTP: "/auth/verify-otp",
-        RESET_PASSWORD: "/auth/reset-password",
     },
-    FORGOT_PASSWORD: {
-        BASE: "/auth/forgot-password",
-    }
+    USER: {
+        HOME: "/user/home",
+    },
 } as const;

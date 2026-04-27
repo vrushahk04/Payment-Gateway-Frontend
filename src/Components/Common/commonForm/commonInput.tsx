@@ -31,16 +31,16 @@ const CommonInput = ({
       </label>
 
       <Input
-        {...field}
-        type={type}
-        placeholder={placeholder}
-        size="large"
-        prefix={prefix}
-        status={meta.touched && meta.error ? "error" : ""}
-        disabled={disabled}
-        className="rounded-lg h-12 text-base"
-        style={{ borderRadius: 8 }}
-      />
+  {...field}
+  type={type}
+  placeholder={placeholder}
+  size="large"
+  prefix={prefix}
+  status={meta.touched && meta.error ? "error" : ""}
+  disabled={disabled}
+  className="custom-input rounded-lg h-12 text-base"
+  style={{ borderRadius: 8 }}
+/>
 
       {meta.touched && meta.error && (
         <p className="text-red-500 text-xs mt-2 flex items-center gap-1">

@@ -43,3 +43,26 @@ export type Params = Record<
     string,
     string | number | boolean | null | undefined
 >;
+
+
+export interface PageState {
+    page: number;
+    limit: number;
+    totalPages: number;
+}
+export interface PageStatus {
+    totalData: number;
+    state: PageState;
+}
+
+export interface MessageStatus {
+    status: number;
+    message: string;
+    error: Record<string, unknown>;
+}
+
+
+export interface PhoneNumberType {
+    countryCode?: string;
+    number?: string;
+}

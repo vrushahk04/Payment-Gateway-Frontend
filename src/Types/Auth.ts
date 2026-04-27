@@ -1,10 +1,15 @@
 import type { CommonDataType, MessageStatus } from "./Common";
-
-export interface LoginPayload {
+// Form values (UI)
+export interface LoginFormValues {
     email: string;
     password: string;
 }
 
+// API payload (backend)
+export interface LoginPayload {
+    userName: string;
+    password: string;
+}
 export interface ChangePasswordPayload {
     email?: string;
     oldPassword?: string;
@@ -25,14 +30,6 @@ export interface LoginResponse extends MessageStatus {
     };
 }
 
-export interface ForgotPasswordPayload {
-    email: string;
-}
-
-export interface VerifyOtpPayload {
-    email: string;
-    otp: string;
-}
 
 export interface UpdatePasswordPayload {
     email: string;
@@ -41,17 +38,6 @@ export interface UpdatePasswordPayload {
 }
 
 export interface UpdatePasswordFormValues {
-    newPassword: string;
-    confirmPassword: string;
-}
-
-export interface ResendOtpPayload {
-    email: string;
-}
-
-export interface ResetPasswordPayload {
-    email: string;
-    oldPassword: string;
     newPassword: string;
     confirmPassword: string;
 }

@@ -1,45 +1,46 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { STORAGE_KEYS } from "../../Constants";
-import { Storage, Stringify } from "../../Utils";
-import type { LoginResponse } from "../../Types";
-
-const StoredUser = JSON.parse(Storage.getItem(STORAGE_KEYS.USER) || "null");
-const StoredToken = Storage.getItem(STORAGE_KEYS.TOKEN) || null;
+import { Storage } from "../../Utils";
+const StoredUser = Storage.getItem(STORAGE_KEYS.USER)
+    ? JSON.parse(Storage.getItem(STORAGE_KEYS.USER)!)
+    : null;
 
 const initialState = {
-    token: StoredToken,
-    user: StoredUser,
-    isAuthenticated: !!StoredToken,
-    signinResponse: null as { email: string; otp?: string; type?: "signin" | "forgot-password"; responseData?: LoginResponse["data"] } | null,
+    token: StoredUser?.token || null,
+    user: StoredUser || null,
+    role: StoredUser?.role || null,
+    isAuthenticated: !!StoredUser?.token,
 };
 
 const authSlice = createSlice({
     name: "auth",
     initialState,
     reducers: {
-        setSignin: (state, action) => {
-            state.token = action.payload.token;
+        setLogin: (state, action) => {
+            const data = action.payload;
+
+            if (!data?.token) return;
+
+            state.token = data.token;
+            state.user = data;
+            state.role = data.role;
             state.isAuthenticated = true;
-            state.user = action.payload;
-            Storage.setItem(STORAGE_KEYS.TOKEN, action.payload.token);
-            Storage.setItem(STORAGE_KEYS.USER, Stringify(action.payload));
+
+            Storage.setItem(STORAGE_KEYS.TOKEN, data.token);
+            Storage.setItem(STORAGE_KEYS.USER, JSON.stringify(data));
         },
-        setUser: (state, action) => {
-            state.user = action.payload;
-            Storage.setItem(STORAGE_KEYS.USER, Stringify(action.payload));
-        },
-        setSigninResponse: (state, action) => {
-            state.signinResponse = action.payload;
-        },
+
         setSignOut(state) {
             state.token = null;
             state.user = null;
+            state.role = null;
             state.isAuthenticated = false;
+
             Storage.clear();
             window.location.reload();
         },
     },
 });
 
-export const { setSignOut, setUser, setSignin, setSigninResponse } = authSlice.actions;
+export const { setSignOut, setLogin } = authSlice.actions;
 export default authSlice.reducer;

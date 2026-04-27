@@ -6,7 +6,7 @@ import { useAppDispatch } from "../../Store";
 import { setSignOut } from "../../Store";
 import { ROUTES } from "../../Constants";
 
-const Dashboard = () => {
+const User = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -18,7 +18,7 @@ const Dashboard = () => {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center gap-6">
       
-      <h1 className="text-2xl font-semibold">Admin Dashboard</h1>
+      <h1 className="text-2xl font-semibold">UserDashboard</h1>
 
       <Button
         type="primary"
@@ -33,4 +33,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default User;

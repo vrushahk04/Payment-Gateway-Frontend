@@ -1,13 +1,13 @@
 export const KEYS = {
     AUTH: {
-        LOFIN: "admin-login",
-        FORGOT_PASSWORD: "forgot-password",
-        VERIFY_OTP: "verify-otp",
-        UPDATE_PASSWORD: "update-password",
-        RESET_PASSWORD: "reset-password",
-        RESEND_OTP: "resend-otp",
+        LOGIN: "admin-login",
     },
     DASHBOARD: {
         BASE: "dashboard",
-    }
+    },
+    USER: {
+        UPDATE_PROFILE: "update-profile",
+        UPDATE: "update-user",
+        BASE: "user",
+    },
 }

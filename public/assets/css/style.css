@@ -17,6 +17,29 @@
     cursor: pointer;
   }
   body {
-    @apply relative font-normal bg-blue-50 text-gray-600 font-outfit dark:bg-gray-dark dark:text-gray-300;
+    @apply relative   text-gray-600 font-outfit dark:bg-gray-dark dark:text-gray-300;
+  }
+}
+@layer components {
+  .custom-input.ant-input {
+    @apply rounded-lg transition;
+  }
+
+  /* Focus state */
+  .custom-input.ant-input:focus,
+  .custom-input.ant-input-focused {
+    @apply border-primary;
+    box-shadow: 0 0 0 2px var(--primary);
+  }
+
+  /* Hover */
+  .custom-input.ant-input:hover {
+    @apply border-primary;
+  }
+
+  /* Error */
+  .custom-input.ant-input-status-error:focus,
+  .custom-input.ant-input-status-error.ant-input-focused {
+    box-shadow: 0 0 0 2px rgba(255, 77, 79, 0.2);
   }
 }
